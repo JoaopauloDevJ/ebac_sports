@@ -8,9 +8,11 @@ import * as S from './styles'
 const ProdutosComponent = () => {
   const { data: produtos, isLoading } = useGetProdutosQuery()
 
+  if (isLoading) return <h2>Carregando...</h2>
+
   const produtoEstaNosFavoritos = (produto: ProdutoType) => {
     const produtoId = produto.id
-    const IdsDosFavoritos = favoritos?.map((f) => f.id)
+    const IdsDosFavoritos = favoritos.map((f) => f.id)
 
     return IdsDosFavoritos.includes(produtoId)
   }

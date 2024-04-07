@@ -11,6 +11,5 @@ const api = createApi({
     })
   })
 })
-
 export const { useGetProdutosQuery } = api
 export default api
