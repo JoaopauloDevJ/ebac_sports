@@ -7,7 +7,7 @@ import { favoritar } from '../../store/reducers/favoritos'
 
 type Props = {
   produto: ProdutoType
-  estaNosFavoritos: boolean
+  estaNosFavoritos?: boolean
 }
 
 export const paraReal = (valor: number) =>

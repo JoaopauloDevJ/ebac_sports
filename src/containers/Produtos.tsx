@@ -1,20 +1,24 @@
+import { useSelector } from 'react-redux'
 import { Produto as ProdutoType } from '../App'
 import Produto from '../components/Produto'
 import { useGetProdutosQuery } from '../services/api'
-import favoritos from '../store/reducers/favoritos'
 
 import * as S from './styles'
+import { EstaFavoritos } from '../store/reducers/favoritos'
 
 const ProdutosComponent = () => {
   const { data: produtos, isLoading } = useGetProdutosQuery()
+
+  const favoritos = useSelector((state: EstaFavoritos) => state.favoritos)
 
   if (isLoading) return <h2>Carregando...</h2>
 
   const produtoEstaNosFavoritos = (produto: ProdutoType) => {
     const produtoId = produto.id
-    const IdsDosFavoritos = favoritos.map((f) => f.id)
-
-    return IdsDosFavoritos.includes(produtoId)
+    if (Array.isArray(favoritos)) {
+      const IdsDosFavoritos = favoritos.map((f) => f.id)
+      return IdsDosFavoritos.includes(produtoId)
+    }
   }
 
   return (
